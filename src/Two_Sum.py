@@ -1,4 +1,4 @@
-src Sum.py
+src
 class Solution(object):
     def twoSum(self, nums, target):
         """
