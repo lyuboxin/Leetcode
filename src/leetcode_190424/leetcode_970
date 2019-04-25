@@ -1,0 +1,40 @@
+import math
+class Solution(object):
+    def powerfulIntegers(self, x, y, bound):
+        """
+        :type x: int
+        :type y: int
+        :type bound: int
+        :rtype: List[int]
+        """
+        num=bound
+        L = []
+        if x < y :
+            if x == 1:
+                tmp = y
+            else:
+                tmp = x
+            for i in range(bound):
+                if math.pow(tmp,i) > bound:
+                    num = i
+                    break
+            for m in range(num):
+                for n in range(num):
+                    a = math.pow(x,m) + math.pow(y,n)
+                    if a <= bound and a not in L:
+                        L.append(int(a))
+        else:
+            if y ==1:
+                tmp = x
+            else:
+                tmp = y
+            for i in range(bound):
+                if math.pow(tmp,i) > bound:
+                    num = i
+                    break
+            for m in range(num):
+                for n in range(num):
+                    a = math.pow(x,m) + math.pow(y,n)
+                    if a <= bound and a not in L:
+                        L.append(int(a))
+        return L

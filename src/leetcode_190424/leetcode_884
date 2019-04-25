@@ -1,0 +1,20 @@
+class Solution(object):
+    def uncommonFromSentences(self, A, B):
+        """
+        :type A: str
+        :type B: str
+        :rtype: List[str]
+        """
+        c= A + " " + B
+        dic = {}
+        L = []
+        l = c.split(" ")
+        for x in l:
+            if x not in dic: 
+                dic[x] = 1
+            else:
+                dic[x] = dic[x] + 1
+        for y in dic:
+            if dic[y] == 1:
+                L.append(y)
+        return L

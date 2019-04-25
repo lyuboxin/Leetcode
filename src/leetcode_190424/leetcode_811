@@ -1,0 +1,29 @@
+import string
+class Solution(object):
+    def subdomainVisits(self, cpdomains):
+        """
+        :type cpdomains: List[str]
+        :rtype: List[str]
+        """
+        dic = {}
+        result = []
+        for x in cpdomains:
+            L = x.split(' ')
+            l = list(L[1].split('.'))
+            a = string.replace(L[1],l[0]+'.',"")
+            substring = ""
+            if L[1] not in dic.keys():
+                dic[L[1]] = L[0]
+            else:
+                dic[L[1]] = int(dic[L[1]]) + int(L[0])
+            for i in range(len(l)-1):
+                L[1] = string.replace(L[1],l[i]+'.', "")
+                print L[1]
+                if L[1] not in dic.keys():
+                    dic[L[1]] = L[0]
+                else:
+                    dic[L[1]] = int(dic[L[1]]) + int(L[0])
+        for x in dic.keys():
+            substring = str(dic[x]) + " " + x
+            result.append(substring)
+        return result
