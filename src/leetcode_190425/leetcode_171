@@ -1,0 +1,19 @@
+class Solution(object):
+    def titleToNumber(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        L = list(string)
+        S = list(s)
+        if len(S) == 0:
+            return  " "
+        result = 0
+        for i in range(len(s)):
+            if i == len(s)-1:
+                result = result + L.index(S[-1])+1
+                break
+            result = int(result + math.pow(26, len(s)-i-1)*(L.index(S[i])+1))
+            
+        return result

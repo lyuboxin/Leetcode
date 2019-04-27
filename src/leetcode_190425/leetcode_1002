@@ -1,0 +1,23 @@
+class Solution(object):
+    def commonChars(self, A):
+        """
+        :type A: List[str]
+        :rtype: List[str]
+        """
+        init = list(A[0])
+        init_dic = collections.Counter(init)
+        init_list = init
+        for i in range(len(A)):
+            l = list(A[i])
+            l_dic = collections.Counter(l)
+            for j in set(init_list):
+                if j not in l_dic.keys():
+                    for k in range(init_dic[j]):
+                        init_list.remove(j)
+                    init_dic[j] = 0
+                else:
+                    if l_dic[j] < init_dic[j]:
+                        for k in range(init_dic[j]-l_dic[j]):
+                            init_dic[j] = init_dic[j] - 1
+                            init_list.remove(j)
+        return init_list
