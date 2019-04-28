@@ -1,0 +1,15 @@
+class Solution(object):
+    def addDigits(self, num):
+        """
+        :type num: int
+        :rtype: int
+        """
+        num_s = str(num)
+        while len(num_s) != 1:
+            total_num = 0
+            num_s = list(num_s)
+            for i in num_s:
+                total_num = total_num + int(i)
+            num = total_num
+            num_s = str(num)
+        return num
