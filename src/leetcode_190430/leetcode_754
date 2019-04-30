@@ -1,0 +1,15 @@
+class Solution(object):
+    def reachNumber(self, target):
+        """
+        :type target: int
+        :rtype: int
+        """
+        total = 0
+        count = 0
+        i = 1
+        target = abs(target)
+        while True:
+            total =total + i
+            if total >= target and (total - target) % 2 == 0:
+                return i
+            i = i + 1
