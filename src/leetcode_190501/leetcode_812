@@ -1,0 +1,17 @@
+class Solution(object):
+    def largestTriangleArea(self, points):
+        """
+        :type points: List[List[int]]
+        :rtype: float
+        """
+        max_area = 0
+        for a in range(len(points)):
+            ax, ay = points[a][0], points[a][1]
+            for b in range(a + 1, len(points)):
+                bx, by = points[b][0], points[b][1]
+                for c in range(b + 1, len(points)):
+                    cx, cy = points[c][0], points[c][1]
+                    area = abs(float(ax * (by - cy) + bx * (cy - ay) + cx * (ay - by))/2)
+                    if area > max_area:
+                        max_area = area
+        return max_area
