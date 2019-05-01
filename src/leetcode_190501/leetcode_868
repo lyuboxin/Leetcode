@@ -1,0 +1,21 @@
+class Solution(object):
+    def binaryGap(self, N):
+        """
+        :type N: int
+        :rtype: int
+        """
+        max_distance = 0
+        count = 0
+        flag = 1
+        while N > 0:
+            if N % 2 == 1:
+                flag = flag * -1
+                if flag == 1:
+                    if max_distance < count:
+                        max_distance = count
+                    count = 0
+                    flag = -1
+            if flag == -1:
+                count = count + 1
+            N = N // 2
+        return max_distance
