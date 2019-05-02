@@ -1,0 +1,26 @@
+class Solution(object):
+    def largestTimeFromDigits(self, A):
+        """
+        :type A: List[int]
+        :rtype: str
+        """
+        m = 0
+        h = 0
+        if A == [0,0,0,0]:
+            return "00:00"
+        for n1,n2,n3,n4 in itertools.permutations(A):
+            hour = n1 * 10 + n2
+            minute = n3 * 10 + n4
+            if 0 <= hour <= 23 and 0 <= minute <= 59:
+                if hour > h:
+                    h, m = hour, minute
+                elif hour == h and minute >= m:
+                    h, m = hour, minute   
+        if h == 0 and m == 0:
+            return ""
+        else:
+            if h < 10:
+                h = "0" + str(h)
+            if m < 10:
+                m = "0" + str(m)
+            return str(h) + ":" + str(m)
