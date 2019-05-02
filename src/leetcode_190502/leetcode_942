@@ -1,0 +1,12 @@
+class Solution(object):
+    def diStringMatch(self, S):
+        """
+        :type S: str
+        :rtype: List[int]
+        """
+        i, j, L = 0, len(S), []
+        for s in S:
+            L.append(i if s == "I" else j)
+            i, j = i + (s == "I"), j - (s == "D")
+        return L + [i]
+            
