@@ -1,0 +1,12 @@
+class Solution(object):
+    def divisorGame(self, N):
+        """
+        :type N: int
+        :rtype: bool
+        """
+        count, x = 0, 1 
+        while N > 1:  
+            N, count = N - x, count + 1  
+            if N == 1:  
+                if count % 2 == 0: return False
+                else: return True 
