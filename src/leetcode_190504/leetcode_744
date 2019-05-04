@@ -1,0 +1,15 @@
+class Solution(object):
+    def nextGreatestLetter(self, letters, target):
+        """
+        :type letters: List[str]
+        :type target: str
+        :rtype: str
+        """
+        if target < letters[0]:
+            return letters[0]
+        if target >= letters[-1]:
+            return letters[0]
+        target = chr(ord(target) + 1)
+        print target
+        index = bisect.bisect_left(letters, target)
+        return letters[index]
