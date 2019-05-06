@@ -1,0 +1,19 @@
+class Solution(object):
+    memo = {}
+    def __init__(self):
+        self.memo = {}
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        return self.rob_sub(nums, len(nums)-1)
+    
+    def rob_sub(self, nums, i):
+        if i < 0:
+            return 0
+        if i in self.memo:
+            return self.memo[i]
+        result = max(self.rob_sub(nums, i-1), self.rob_sub(nums, i-2) + nums[i])
+        self.memo[i] = result
+        return result
