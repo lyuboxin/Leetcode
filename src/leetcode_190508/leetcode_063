@@ -1,0 +1,23 @@
+class Solution(object):
+    def uniquePathsWithObstacles(self, obstacleGrid):
+        """
+        :type obstacleGrid: List[List[int]]
+        :rtype: int
+        """
+        self.grid = obstacleGrid
+        m = len(obstacleGrid)
+        n = len(obstacleGrid[0])
+        self.memo = [[0] * n for index in range(m)]
+        return self.uniquePathsWithObstaclesSub(m, n)
+    
+    def uniquePathsWithObstaclesSub(self, i, j):
+        if self.grid[i-1][j-1] == 0:
+            if i <= 1 and j <= 1:
+                return 1
+            if self.memo[i - 1][j - 1] != 0:
+                return self.memo[i - 1][j - 1]
+            result = (self.uniquePathsWithObstaclesSub(i-1, j) if i-1 > 0 else 0) + (self.uniquePathsWithObstaclesSub(i, j-1) if j-1 > 0 else 0)
+            self.memo[i - 1][j - 1] = result
+            return result
+        else:
+            return 0
