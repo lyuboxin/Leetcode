@@ -1,0 +1,17 @@
+class Solution(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        dp = [[0]*len(s) for i in range(len(s))]
+        ans = ""
+        max_len = 0
+        for i in range(len(s)):
+            for j in range(i, -1, -1):
+                if s[i] == s[j] and (i-j < 3 or dp[i-1][j+1] == 1):
+                    dp[i][j] = 1
+                    if ans == "" or max_len < i - j + 1:
+                        ans = s[j:i+1]
+                        max_len = i - j + 1
+        return ans
