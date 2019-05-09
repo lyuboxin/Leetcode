@@ -1,0 +1,18 @@
+class Solution(object):
+    def isPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        dic = "abcdefghijklmnopqrstuvwxyz"
+        dic_num = "0123456789"
+        ans = []
+        for i in s:
+            i = i.lower()
+            for x in i:
+                if x in dic or x in dic_num:
+                    ans.append(x)
+        for i in range(len(ans)//2):
+            if ans[i] != ans[len(ans) - i - 1]:
+                return False
+        return True
