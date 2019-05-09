@@ -1,0 +1,21 @@
+class Solution(object):
+    def reverseVowels(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        vowels = "aueoiAUEOI"
+        ans = []
+        index = []
+        for i, element in enumerate(s):
+            if element in vowels:
+                index.append(i)
+                ans.append(element)
+        ans.reverse()
+        s = list(s)
+        for i in range(len(ans)):
+            s[index[i]] = ans[i]
+        string = ""
+        for j in s:
+            string = string + j
+        return string
