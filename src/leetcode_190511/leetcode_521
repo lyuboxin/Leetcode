@@ -1,0 +1,17 @@
+class Solution(object):
+    def findLUSlength(self, a, b):
+        """
+        :type a: str
+        :type b: str
+        :rtype: int
+        """
+        if len(a) > len(b):
+            string_min = b
+            string_max = a
+        else:
+            string_min = a
+            string_max = b
+        for i in range(len(string_max), -1, -1):
+            if string_max[0:i] not in string_min:
+                return i
+        return -1
