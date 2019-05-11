@@ -1,0 +1,28 @@
+class Solution(object):
+    def detectCapitalUse(self, word):
+        """
+        :type word: str
+        :rtype: bool
+        """
+        s = "abcdefghijklmnopqrstuvwxyz"
+        S = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        if word[0] in s:
+            for i in word:
+                if i not in s:
+                    return False
+            return True
+        else:
+            if len(word) == 1:
+                return True
+            else:
+                if word[1] in s:
+                    for j in range(2,len(word)):
+                        if word[j] not in s:
+                            return False
+                    return True
+                else:
+                    for j in range(2, len(word)):
+                        if word[j] not in S:
+                            return False
+                    return True
+        
