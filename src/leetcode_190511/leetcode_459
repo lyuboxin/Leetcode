@@ -1,0 +1,23 @@
+class Solution(object):
+    def repeatedSubstringPattern(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        for i in range(1, len(s)//2+1):
+            substring = s[0:i]
+            L = s
+            length = i
+            j = 0
+            flag = 0
+            while j < len(s):
+                l = s[j:j+length]
+                if l!= substring:
+                    flag = 1
+                    break
+                j = j + length 
+            if flag == 0:
+                return True
+            else:
+                flag =0
+        return False
