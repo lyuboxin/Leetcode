@@ -1,0 +1,24 @@
+class Solution(object):
+    def checkRecord(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        countA = 0
+        countL = 0
+        flag = 0
+        for i in s:
+            if  i == 'L' and flag ==0:
+                flag =1
+            if i != 'L':
+                countL = 0
+                flag = 0
+            if i == 'L' and flag == 1:
+                countL = countL + 1
+            if i == 'A':
+                countA = countA + 1
+            if countL > 2:
+                return False
+            if countA > 1:
+                return False
+        return True
