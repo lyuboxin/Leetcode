@@ -1,0 +1,38 @@
+class Solution(object):
+    def validPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        ptr_left, ptr_right = 0, len(s)-1
+        s = list(s)
+        L = []
+        while ptr_left < ptr_right:
+            if s[ptr_left] == s[ptr_right]:
+                ptr_left = ptr_left + 1
+                ptr_right = ptr_right - 1
+            else:
+                L = s[ptr_left:ptr_right+1]
+                break
+        if len(L) < 1:
+            return True
+        else:
+            ptr_left, ptr_right = 1, len(L) - 1
+            flag_left, flag_right =0, 0
+            while ptr_left < ptr_right:
+                if L[ptr_left] != L[ptr_right]:
+                    flag_left = 1
+                    break
+                ptr_left = ptr_left + 1
+                ptr_right = ptr_right - 1
+            ptr_left, ptr_right = 0, len(L) - 2
+            while ptr_left < ptr_right:
+                if L[ptr_left] != L[ptr_right]:
+                    flag_right = 1
+                    break
+                ptr_left = ptr_left + 1
+                ptr_right = ptr_right - 1
+            if flag_left and flag_right:
+                return False
+            else:
+                return True
