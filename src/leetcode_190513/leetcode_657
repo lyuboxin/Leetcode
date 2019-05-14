@@ -1,0 +1,10 @@
+class Solution(object):
+    def judgeCircle(self, moves):
+        """
+        :type moves: str
+        :rtype: bool
+        """
+        ans = collections.Counter(moves)
+        if ans['U'] == ans['D'] and ans['L'] == ans['R']:
+            return True
+        return False
