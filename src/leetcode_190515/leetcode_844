@@ -1,0 +1,19 @@
+class Solution(object):
+    def backspaceCompare(self, S, T):
+        """
+        :type S: str
+        :type T: str
+        :rtype: bool
+        """
+        return all(x==y for x, y in itertools.izip_longest(self.F(S), self.F(T)))
+    
+    def F(self, S):
+        count = 0
+        for x in reversed(S):
+            if x == '#':
+                count = count + 1
+            elif count:
+                count = count - 1
+            else:
+                yield x
+        
