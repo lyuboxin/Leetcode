@@ -1,0 +1,18 @@
+class Solution(object):
+    def toGoatLatin(self, S):
+        """
+        :type S: str
+        :rtype: str
+        """
+        vowel = "aeiouAEIOU"
+        L = S.split(" ")
+        ans = []
+        for index in range(len(L)):
+            if L[index][0] in vowel:
+                ans.append((L[index]+"ma"+"a"*(index+1) + " "))
+            elif L[index][0] not in vowel:
+                s =len(L[index])
+                ans.append((L[index][1:s]+L[index][0:1] + "ma" + "a"*(index+1) + " "))
+        string = ''.join(ans)
+        string = string[0:len(string)-1]
+        return string
