@@ -1,0 +1,17 @@
+class Solution(object):
+    def toLowerCase(self, str):
+        """
+        :type str: str
+        :rtype: str
+        """
+        a = "abcdefghijklmnopqrstuvwxyz"
+        A = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        ans = []
+        a = list(a)
+        A = list(A)
+        for i in str:
+            if i not in a and i in A:
+                ans.append(a[A.index(i)])
+            else:
+                ans.append(i)
+        return ''.join(ans)
