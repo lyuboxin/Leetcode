@@ -1,0 +1,17 @@
+class Solution(object):
+    def uniqueMorseRepresentations(self, words):
+        """
+        :type words: List[str]
+        :rtype: int
+        """
+        table = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+        al = "abcdefghijklmnopqrstuvwxyz"
+        string = ''
+        ans = []
+        for word in words:
+            for i in word:
+                string = string + table[al.index(i)]
+            ans.append(string)
+            string = ''
+        return len(set(ans))
+        
