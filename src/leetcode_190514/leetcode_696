@@ -1,0 +1,17 @@
+class Solution(object):
+    def countBinarySubstrings(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        chunks, consecutive, res = [], 1, 0
+        for i in range(1, len(s)):
+            if s[i-1] == s[i]:
+                consecutive = consecutive + 1
+            if s[i-1] != s[i]:
+                chunks.append(consecutive)
+                consecutive = 1
+        chunks.append(consecutive)
+        for x in range(1,len(chunks)):
+            res = res + min(chunks[x-1], chunks[x])
+        return res
