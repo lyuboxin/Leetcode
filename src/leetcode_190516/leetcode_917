@@ -1,0 +1,20 @@
+class Solution(object):
+    def reverseOnlyLetters(self, S):
+        """
+        :type S: str
+        :rtype: str
+        """
+        index = []
+        letter = []
+        symbol = []
+        string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        for i, x in enumerate(S):
+            if x in string:
+                letter.append(x)
+            else:
+                index.append(i)
+                symbol.append(x)
+        letter.reverse()
+        for i in range(len(index)):
+            letter.insert(index[i], symbol[i])
+        return ''.join(letter)
