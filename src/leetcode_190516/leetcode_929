@@ -1,0 +1,25 @@
+class Solution(object):
+    def numUniqueEmails(self, emails):
+        """
+        :type emails: List[str]
+        :rtype: int
+        """
+        L = []
+        for x in emails:
+            flag1 = 0
+            flag2 = 0
+            string = ''
+            x = list(x)
+            for i in x:
+                if i == '.' and flag2 == 0:
+                    continue
+                elif i == '+':
+                    flag1 = 1
+                elif i == '@':
+                    string = string + i
+                    flag2 = 1
+                else:
+                    if flag1 == 0 or flag2 == 1:
+                        string = string + i
+            L.append(string)
+        return len(set(L))
