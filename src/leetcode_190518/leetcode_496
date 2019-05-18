@@ -1,0 +1,22 @@
+class Solution(object):
+    def nextGreaterElement(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        ans = []
+        for x in nums1:
+            index = nums2.index(x)
+            if index == len(nums2) - 1:
+                ans.append(-1)
+            else:
+                flag = 0
+                for i in range(index+1, len(nums2)):
+                    if nums2[i] > x:
+                        flag = 1
+                        ans.append(nums2[i])
+                        break
+                if flag == 0:
+                    ans.append(-1)
+        return ans
