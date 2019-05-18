@@ -1,0 +1,32 @@
+class Solution(object):
+    def reorderLogFiles(self, logs):
+        """
+        :type logs: List[str]
+        :rtype: List[str]
+        """
+        def test(string):
+            l = string.split(" ")
+            del l[0]
+            return ' '.join(l)
+        
+        
+        table = "abcdefghijklmnopqrstuvwxyz"
+        letter = []
+        digit = []
+        for x in logs:
+            L = x.split(" ")          
+            if L[1][0:1] in table:
+                letter.append(x)
+            else:
+                digit.append(x)
+        letter.sort(key = test)
+        for i in range(1, len(letter)):
+            substring1 = letter[i-1].split(" ")
+            substring2 = letter[i].split(" ")
+            a, b = substring1[0], substring2[0]
+            del substring1[0]
+            del substring2[0]
+            if ''.join(substring1) == ''.join(substring2) and a > b:
+                letter[i], letter[i-1] = letter[i-1], letter[i]
+        letter.extend(digit)
+        return letter
