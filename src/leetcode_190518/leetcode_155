@@ -1,0 +1,29 @@
+class MinStack(object):
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.ans = []
+        
+
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: None
+        """
+        self.ans.append(x)
+        
+
+    def pop(self):
+        """
+        :rtype: None
+        """
+        del self.ans[-1]
+        
+
+    def top(self):
+        """
+        :rtype: int
+        """
+        return self.ans[-1]
