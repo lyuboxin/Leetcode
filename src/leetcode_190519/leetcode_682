@@ -1,0 +1,31 @@
+class Solution(object):
+    def calPoints(self, ops):
+        """
+        :type ops: List[str]
+        :rtype: int
+        """
+        ans = []
+        result = []
+        tmp1 = 0
+        tmp2 = 0
+        for x in ops:
+            if x != 'C' and x!= 'D' and x!='+':
+                if len(ans) == 0:
+                    ans.append(int(x))
+                    result.append(int(x))
+                else:
+                    item = int(ans[-1]) + int(x)
+                    ans.append(item)
+                    result.append(int(x))
+            elif x == "C":
+                ans.pop()
+                result.pop()
+            elif x == "D":
+                item = 2*int(result[-1]) + int(ans[-1])
+                result.append(2*int(result[-1]))
+                ans.append(item)
+            else:
+                item = result[-1] + result[-2] + ans[-1]
+                result.append((result[-1] + result[-2]))
+                ans.append(item)
+        return ans[-1]
