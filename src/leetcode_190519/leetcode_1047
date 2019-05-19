@@ -1,0 +1,16 @@
+class Solution(object):
+    def removeDuplicates(self, S):
+        """
+        :type S: str
+        :rtype: str
+        """
+        ans = []
+        for s in S:
+            if len(ans) == 0:
+                ans.append(s)
+            else:
+                if ans[-1] == s:
+                    ans.pop()
+                else:
+                    ans.append(s)
+        return ''.join(ans)
