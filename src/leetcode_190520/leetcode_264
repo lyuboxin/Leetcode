@@ -1,0 +1,21 @@
+class Solution(object):
+    def nthUglyNumber(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        heap = [1]
+        heapq.heapify(heap)
+        count = 0
+        while count < n:
+            i = heapq.heappop(heap)
+            count = count + 1
+            last = i
+            if count == n:
+                return i
+            if i*2 not in heap:
+                heapq.heappush(heap, i*2)
+            if i*3 not in heap:
+                heapq.heappush(heap, i*3)
+            if i*5 not in heap:
+                heapq.heappush(heap, i*5)
