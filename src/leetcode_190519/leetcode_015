@@ -1,0 +1,30 @@
+class Solution(object):
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        ans = []
+        hash_list = []
+        nums.sort()
+        ptr_origin = 0
+        while ptr_origin < len(nums) - 2:
+            ptr_left = ptr_origin + 1
+            ptr_right = len(nums) - 1 
+            while ptr_left < ptr_right:
+                if nums[ptr_origin] + nums[ptr_right] + nums[ptr_left] == 0:
+                    ans.append([nums[ptr_origin], nums[ptr_left], nums[ptr_right]])
+                    while ptr_left < ptr_right and nums[ptr_left] == nums[ptr_left + 1]:
+                        ptr_left = ptr_left + 1
+                    while ptr_right > ptr_left and nums[ptr_right] == nums[ptr_right - 1]:
+                        ptr_right = ptr_right - 1
+                    ptr_left = ptr_left + 1
+                    ptr_right = ptr_right - 1
+                elif nums[ptr_origin] + nums[ptr_right] + nums[ptr_left] < 0:
+                    ptr_left = ptr_left + 1
+                else:
+                    ptr_right = ptr_right - 1
+            while ptr_origin < len(nums) - 2 and nums[ptr_origin] == nums[ptr_origin + 1]: 
+                ptr_origin = ptr_origin + 1
+            ptr_origin = ptr_origin + 1
+        return ans
