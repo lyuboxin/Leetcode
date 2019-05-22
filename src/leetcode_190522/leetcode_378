@@ -1,0 +1,12 @@
+class Solution(object):
+    def kthSmallest(self, matrix, k):
+        """
+        :type matrix: List[List[int]]
+        :type k: int
+        :rtype: int
+        """
+        streams = map(lambda x: (matrix[x][y] for y in range(len(matrix))),  [ i for i in range(len(matrix[0]))])
+        stream = heapq.merge(*streams)
+        for index, j in enumerate(stream):
+            if index == k-1:
+                return j
