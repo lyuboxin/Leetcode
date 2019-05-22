@@ -1,0 +1,14 @@
+class Solution(object):
+    def frequencySort(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        def func(x):
+            string = ""
+            for i in range(x[0]):
+                string = string + x[1]
+            return string
+        result = collections.Counter(s)
+        stream = map(func, sorted(([result[key], key] for key in result.keys()),key = lambda x: x[0], reverse = True))
+        return "".join(list(stream))
