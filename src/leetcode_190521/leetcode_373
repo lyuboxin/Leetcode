@@ -1,0 +1,23 @@
+class Solution(object):
+    def kSmallestPairs(self, nums1, nums2, k):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        ans = []
+        if len(nums1) == 0 or len(nums2) == 0:
+            return []
+        for i in nums1:
+            for j in nums2:
+                y = i + j
+                ans.append([y,i,j])
+        ans.sort(key =lambda x: x[0], reverse = True)
+        result = []
+        for i in range(k):
+            item = ans.pop()
+            result.append([item[1], item[2]])
+            if len(ans) == 0:
+                break
+        return result
