@@ -1,0 +1,20 @@
+class Solution(object):
+    def networkDelayTime(self, times, N, K):
+        """
+        :type times: List[List[int]]
+        :type N: int
+        :type K: int
+        :rtype: int
+        """
+        p = [(0,K)]
+        node = {}
+        dic = collections.defaultdict(list)
+        for u,v,w in times:
+            dic[u].append((v,w))
+        while p:
+            time, item = heapq.heappop(p)
+            if item not in node:
+                node[item] = time
+                for v, w in dic[item]:
+                    heapq.heappush(p, (time+w, v))
+        return max(node.values()) if len(node) == N else -1
