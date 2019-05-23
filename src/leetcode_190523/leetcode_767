@@ -1,0 +1,25 @@
+class Solution(object):
+    def reorganizeString(self, S):
+        """
+        :type S: str
+        :rtype: str
+        """
+        ans = collections.Counter(S)
+        heap = []
+        for item, count in ans.items():
+            heapq.heappush(heap, (-count, item))
+        if 2 * max(ans.values()) > sum(ans.values()) + 1:
+            return ""
+        result = []
+        while len(heap) >= 2:
+            count1, item1 = heapq.heappop(heap)
+            count2, item2 = heapq.heappop(heap)
+            result.extend([item1,item2])
+            if count1 + 1:
+                heapq.heappush(heap, (count1+1, item1))
+            if count2 + 1:
+                heapq.heappush(heap, (count2+1, item2))
+        if heap:
+            result.append(heap[0][1])
+        return ''.join(result)
+            
