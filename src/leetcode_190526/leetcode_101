@@ -1,0 +1,45 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        self.result = []
+        self.array([root])
+        print self.result
+        for a in self.result:
+            sub1 = a[0:len(a)//2]
+            sub2 = a[len(a)//2: len(a)]
+            sub1.reverse()
+            if sub1 != sub2:
+                return False
+        return True
+        
+    def array(self, arr):
+        L = []
+        ans = []
+        for x in arr:
+            if x == None:
+                continue
+            if x.left != None:
+                L.append(x.left)
+                ans.append(x.left.val)
+            else:
+                ans.append('a')
+            if x.right != None:
+                L.append(x.right)
+                ans.append(x.right.val)
+            else:
+                ans.append('a')
+        if len(L) == 0:
+            return
+        self.result.append(ans)
+        self.array(L)
+        
