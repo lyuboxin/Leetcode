@@ -1,0 +1,38 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def isSubtree(self, s, t):
+        """
+        :type s: TreeNode
+        :type t: TreeNode
+        :rtype: bool
+        """
+        self.flag = 0
+        self.traverse_s(s, t)
+        return self.flag
+        
+    def traverse_s(self, snode, tnode):
+        if self.traverse_t(snode, tnode):
+                self.flag = 1
+        if snode == None:
+            return
+        self.traverse_s(snode.left, tnode)
+        self.traverse_s(snode.right, tnode)
+            
+    
+    def traverse_t(self, snode, tnode):
+        if tnode == None and snode == None:
+            return True
+        if tnode == None and snode != None:
+            return False
+        if tnode != None and snode == None:
+            return False
+        if tnode.val != snode.val:
+            return False
+        if self.traverse_t(snode.left, tnode.left) and self.traverse_t(snode.right, tnode.right):
+            return True
