@@ -1,0 +1,27 @@
+"""
+# Definition for a Node.
+class Node(object):
+    def __init__(self, val, children):
+        self.val = val
+        self.children = children
+"""
+class Solution(object):
+    def postorder(self, root):
+        """
+        :type root: Node
+        :rtype: List[int]
+        """
+        self.result = []
+        self.traverse(root)
+        if root:
+            self.result.append(root.val)
+        return self.result
+        
+        
+        
+    def traverse(self, node):
+        if node == None:
+            return 
+        for item in node.children:
+            self.traverse(item)
+            self.result.append(item.val)
