@@ -1,0 +1,30 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def findSecondMinimumValue(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.heap = []
+        self.dfs(root)
+        if self.heap:
+            item = heapq.heappop(self.heap)
+        else:
+            return -1
+        while self.heap:
+            result = heapq.heappop(self.heap)
+            if item != result:
+                return result
+        return -1
+    
+    def dfs(self, node):
+        if node:
+            heapq.heappush(self.heap, node.val)
+            self.dfs(node.left)
+            self.dfs(node.right)
