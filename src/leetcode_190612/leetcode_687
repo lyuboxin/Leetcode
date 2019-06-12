@@ -1,0 +1,33 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def longestUnivaluePath(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.longest_path = 0
+        self.find_longest(root)
+        return self.longest_path
+        
+    def find_longest(self, node):
+        if node:
+            left= self.find_longest(node.left)
+            right = self.find_longest(node.right)
+            if node.left and node.val == node.left.val:
+                left = left + 1
+            else:
+                left = 0
+            if node.right and node.val == node.right.val:
+                right = right + 1
+            else:
+                right = 0
+            self.longest_path = max(self.longest_path, left + right)
+            return max(left, right)
+        else:
+            return 0
