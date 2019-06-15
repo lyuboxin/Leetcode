@@ -1,0 +1,29 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def sumRootToLeaf(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.total = 0
+        string = ""
+        self.traverse(root, string)
+        return self.total
+        
+    def traverse(self, node, string):
+        if node:
+            string = string + str(node.val)
+            if node.left == None and node.right == None:
+                value = 0
+                stirng = list(string)
+                for i in range(len(stirng)):
+                    value = value + (2**(len(string)-i-1))*int(string[i])
+                self.total = self.total + value
+            self.traverse(node.left, string)
+            self.traverse(node.right, string)
