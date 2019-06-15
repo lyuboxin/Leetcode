@@ -1,0 +1,26 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def rangeSumBST(self, root, L, R):
+        """
+        :type root: TreeNode
+        :type L: int
+        :type R: int
+        :rtype: int
+        """
+        self.total = 0
+        self.L, self.R = L, R
+        self.traverse(root)
+        return self.total
+    
+    def traverse(self, root):
+        if root:
+            if root.val >= self.L and root.val <= self.R:
+                self.total = self.total + root.val
+            self.traverse(root.left)
+            self.traverse(root.right)
