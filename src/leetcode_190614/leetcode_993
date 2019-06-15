@@ -1,0 +1,40 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def isCousins(self, root, x, y):
+        """
+        :type root: TreeNode
+        :type x: int
+        :type y: int
+        :rtype: bool
+        """
+        self.x = x
+        self.y = y
+        self.parent_x, self.parent_y = None, None
+        self.deep_x, self.deep_y = 0, 0
+        self.traverse(root, 0)
+        if self.parent_x != self.parent_y and self.deep_x == self.deep_y:
+            return True
+        return False
+    
+    def traverse(self, node, deepth):
+        if node:
+            if node.left and node.left.val == self.x:
+                self.parent_x = node
+                self.deep_x = deepth + 1
+            elif node.right and node.right.val == self.x:
+                self.parent_x = node
+                self.deep_x = deepth + 1
+            if node.left and node.left.val == self.y:
+                self.parent_y = node
+                self.deep_y = deepth + 1
+            elif node.right and node.right.val == self.y:
+                self.parent_y = node
+                self.deep_y = deepth + 1
+            self.traverse(node.right, deepth + 1)
+            self.traverse(node.left, deepth + 1)
