@@ -1,0 +1,22 @@
+class Solution(object):
+    def minimumTotal(self, triangle):
+        """
+        :type triangle: List[List[int]]
+        :rtype: int
+        """
+        table = []
+        for i in range(len(triangle)):
+            res = []
+            for j in range(len(triangle[i])):
+                if i != 0:
+                    min_num = float('inf')
+                    if j-1 >= 0:
+                        min_num = min(min_num, triangle[i][j] + table[i-1][j-1])
+                    if j < len(triangle[i-1]):
+                        min_num = min(min_num, triangle[i][j] + table[i-1][j])
+                    res.append(min_num)
+            if i == 0:
+                table.append([triangle[0][0]])
+            else:
+                table.append(res)
+        return min(table[-1])
