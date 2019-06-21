@@ -1,0 +1,32 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def flatten(self, root):
+        """
+        :type root: TreeNode
+        :rtype: None Do not return anything, modify root in-place instead.
+        """
+        self.result = []
+        self.traverse(root)
+        if self.result:
+            self.result.pop(0)
+            self.build(root)
+            
+    
+    def traverse(self, node):
+        if node:
+            self.result.append(node.val)
+            self.traverse(node.left)
+            self.traverse(node.right)
+            
+    def build(self, node):
+        if node:
+            node.left = None
+            if self.result:
+                node.right = TreeNode(self.result.pop(0))
+                self.build(node.right)
