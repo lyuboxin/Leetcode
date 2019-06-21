@@ -1,0 +1,27 @@
+"""
+# Definition for a Node.
+class Node(object):
+    def __init__(self, val, left, right, next):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+class Solution(object):
+    def connect(self, root):
+        """
+        :type root: Node
+        :rtype: Node
+        """
+        self.traverse(root)
+        return root
+    
+    def traverse(self, node):
+        if node and node.left:
+            node.left.next = node.right
+            if node.next == None:
+                node.right.next = None
+            else:
+                node.right.next = node.next.left
+            self.traverse(node.left)
+            self.traverse(node.right)
