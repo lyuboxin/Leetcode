@@ -2,7 +2,7 @@ class Solution(object):
     def rob(self, nums):
         """
         :type nums: List[int]
-        :rtype: int
+        :rtype:int
         """
         table = [0]*(len(nums)-1)
         table1 = [0]*(len(nums)-1)
