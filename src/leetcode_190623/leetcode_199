@@ -1,0 +1,28 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def rightSideView(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        result = []
+        self.dict = collections.defaultdict(list)
+        self.traverse(root,0)
+        for k,v in self.dict.items():
+            result.append(v[-1])
+        return result
+    
+    def traverse(self, node, degree):
+        if node:
+            if degree not in self.dict:
+                self.dict[degree] = [node.val]
+            else:
+                self.dict[degree].append(node.val)
+            self.traverse(node.left,degree+1)
+            self.traverse(node.right, degree+1)
