@@ -1,0 +1,31 @@
+import math
+class Solution(object):
+    def maximalSquare(self, matrix):
+        """
+        :type matrix: List[List[str]]
+        :rtype: int
+        """
+        if len(matrix) == 0:
+            return 0
+        table = [[0]*len(matrix[0]) for i in range(len(matrix))]
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if i == 0 or j == 0:
+                    if matrix[i][j] == "1":
+                        table[i][j] = 1
+                    else:
+                        table[i][j] = 0
+                else:
+                    if matrix[i][j] == "0":
+                        table[i][j] = 0
+                    else:
+                        area = min(table[i-1][j-1],table[i-1][j],table[i][j-1])
+                        if area == 0:
+                            table[i][j] = 1
+                        else:
+                            length = math.sqrt(area)
+                            table[i][j] = length * 2 + area + 1
+        result = []
+        for sub_list in table:
+            result.append(max(sub_list))
+        return int(max(result))
