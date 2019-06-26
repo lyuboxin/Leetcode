@@ -1,0 +1,56 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def deleteNode(self, root, key):
+        """
+        :type root: TreeNode
+        :type key: int
+        :rtype: TreeNode
+        """
+        self.key = key
+        if root:
+            if root.val == key:
+                sub_right = self.find_leaf(root.left)
+                if sub_right:
+                    sub_right.right = root.right
+                else:
+                    return root.right
+                return root.left
+            else:
+                self.dfs(root, root.left, 1)
+                self.dfs(root, root.right, 0)
+                return root
+        
+        
+    def dfs(self, parent, node, flag):
+        if node:
+            if node.val > self.key:
+                self.dfs(node, node.left, 1)
+            elif node.val < self.key:
+                self.dfs(node, node.right, 0)
+            else:
+                right = self.find_leaf(node.left)
+                if not right:
+                    if flag == 1:
+                        parent.left = node.right
+                    else:
+                        parent.right = node.right
+                else:
+                    if node.right:
+                        right.right = node.right
+                    if flag == 1:
+                        parent.left = node.left
+                    else:
+                        parent.right = node.left
+                                        
+    def find_leaf(self, node):
+        if node:
+            if not node.right:
+                return node
+            else:
+                return self.find_leaf(node.right)
