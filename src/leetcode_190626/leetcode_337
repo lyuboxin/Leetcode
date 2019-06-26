@@ -1,0 +1,33 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def rob(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.dic = collections.defaultdict()
+        return self.rob_help(root)
+        
+        
+        
+    def rob_help(self, node):
+        if node:
+            if node in self.dic:
+                return self.dic[node]
+            val = 0
+            if node.left:
+                val = val + self.rob_help(node.left.left) + self.rob_help(node.left.right)
+            if node.right:
+                val = val + self.rob_help(node.right.left) + self.rob_help(node.right.right)
+                
+            rob = max(val + node.val, self.rob_help(node.left)+ self.rob_help(node.right))
+            self.dic[node] = rob
+            return rob
+        else:
+            return 0
