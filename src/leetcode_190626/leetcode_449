@@ -1,0 +1,63 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Codec:
+        
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        self.preorder = []
+        self.inorder = []
+        self.dfs(root)        
+        if self.preorder and self.inorder:
+            data = ','.join(self.preorder) +','+ ','.join(self.inorder)
+        elif self.preorder and len(self.inorder) == 0:
+            data = ','.join(self.preorder)
+        elif self.inorder and len(self.preorder) == 0:
+            data = ','.join(self.inorder)
+        else:
+            data = ''      
+        return data
+        
+    def dfs(self, node):
+        if node:
+            self.preorder.append(str(node.val))
+            self.dfs(node.left)
+            self.inorder.append(str(node.val))
+            self.dfs(node.right)
+        
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.        
+        :type data: str
+        :rtype: TreeNode
+        """
+        sub_list = data.split(',')
+        preorder = sub_list[:len(sub_list)/2]
+        inorder = sub_list[len(sub_list)/2:]
+        root = None
+        return self.buildtree(root, preorder, inorder)
+        
+            
+            
+    def buildtree(self, node, preorder, inorder):
+        if inorder and preorder:
+            value = preorder.pop(0)
+            node = TreeNode(value)
+            index = inorder.index(value)
+            node.left = self.buildtree(node.left, preorder, inorder[:index])
+            node.right = self.buildtree(node.right, preorder, inorder[index+1:])
+            return node
+        
+        
+
+# Your Codec object will be instantiated and called as such:
+# codec = Codec()
+# codec.deserialize(codec.serialize(root))
