@@ -1,0 +1,28 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def findBottomLeftValue(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
+            return 0
+        self.dic = collections.defaultdict(list)
+        self.traverse(root, 0)
+        bottom = max(self.dic.keys())
+        return self.dic[bottom].pop(0)
+        
+    def traverse(self, node, degree):
+        if node:
+            if degree in self.dic:
+                self.dic[degree].append(node.val)
+            else:
+                self.dic[degree] = [node.val]
+            self.traverse(node.left, degree+1)
+            self.traverse(node.right, degree+1)
