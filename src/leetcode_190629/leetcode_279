@@ -1,0 +1,15 @@
+class Solution(object):
+    def numSquares(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        dp = [0]*n
+        for i in range(1,n+1):
+            min_num = float('inf')
+            j = 1
+            while j*j <=i:
+                min_num = min(min_num, dp[i-1-j*j]+1)
+                j +=1
+            dp[i-1] = min_num  
+        return dp[-1]
