@@ -1,0 +1,44 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def constructMaximumBinaryTree(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: TreeNode
+        """
+        if len(nums) == 0:
+            return None
+        max_num = max(nums)
+        root = TreeNode(max_num)
+        index = nums.index(max_num)
+        left = nums[:index]
+        right = nums[index+1:]
+        if left:
+            root.left = TreeNode(0)
+            self.traverse(root.left, left)
+        if right:
+            root.right = TreeNode(0)
+            self.traverse(root.right, right)
+        return root
+        
+        
+    def traverse(self, node, array):
+        if array:
+            max_sub = max(array)
+            node.val = max_sub
+            sub_index = array.index(max_sub)
+            left_sub = array[:sub_index]
+            right_sub = array[sub_index+1:]
+            if left_sub:
+                node.left = TreeNode(0)
+                self.traverse(node.left, left_sub)
+            if right_sub: 
+                node.right = TreeNode(0)
+                self.traverse(node.right, right_sub)
+            
+        
