@@ -1,0 +1,24 @@
+class Solution(object):
+    def isBipartite(self, graph):
+        """
+        :type graph: List[List[int]]
+        :rtype: bool
+        """
+        self.color = {}
+        for i in range(len(graph)):
+            if i not in self.color:
+                self.color[i] = 0
+                if not self.dfs(i,graph):
+                    return False
+        return True
+    
+    def dfs(self, node, graph):
+        for j in graph[node]:
+            if j in self.color:
+                if self.color[j] == self.color[node]:
+                    return False
+            else:
+                self.color[j] = 1 - self.color[node]
+                if not self.dfs(j, graph):
+                    return False
+        return True
