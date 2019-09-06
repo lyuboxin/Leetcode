@@ -1,0 +1,45 @@
+class Solution(object):
+    def findOrder(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: List[int]
+        """
+        self.visited = collections.defaultdict()
+        self.stack = []
+        self.graph = collections.defaultdict(list)
+        self.recStack = {}
+        self.prerequisites = prerequisites
+        for course in range(numCourses):
+            self.visited[course] = 0
+            self.recStack[course] = 0
+        for node in prerequisites:
+            self.graph[node[0]].append(node[1])
+        for i in prerequisites:
+            if self.visited[i[0]] == 0:
+                self.visited[i[0]] = 1
+                if self.dfs(i[0], self.graph[i[0]]):
+                    return []
+        for k in range(numCourses):
+            if k not in self.stack:
+                self.stack.insert(0, k)
+        return self.stack
+        
+                
+                
+    def dfs(self, parent, children):
+        self.recStack[parent] = 1
+        for j in children:
+            if self.visited[j] == 0:
+                self.visited[j] = 1
+                if j in self.graph:
+                    if self.dfs(j, self.graph[j]):
+                        return True
+                else:
+                    self.stack.append(j)
+            else:
+                if self.recStack[j] == 1:
+                    return True
+        self.recStack[parent] = 0
+        self.stack.append(parent)
+        return False
