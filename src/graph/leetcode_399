@@ -1,0 +1,46 @@
+class Solution(object):
+    def calcEquation(self, equations, values, queries):
+        """
+        :type equations: List[List[str]]
+        :type values: List[float]
+        :type queries: List[List[str]]
+        :rtype: List[float]
+        """
+        self.graph = collections.defaultdict(list)
+        for index in range(len(values)):
+            self.graph[equations[index][0]].append([equations[index][1], values[index]])
+            self.graph[equations[index][1]].append([equations[index][0], 1/(values[index])])
+        self.dic = collections.defaultdict(list) 
+        for i in self.graph.keys():
+            self.visited = []
+            self.visited.append(i)
+            for j in self.graph[i]:
+                if j[0] not in self.visited:
+                    self.visited.append(j[0])
+                    self.dic[i].append([j[0], j[1]])
+                    self.dfs(i, j[0], j[1])
+        res = []
+        for pairs in queries:
+            if pairs[0] not in self.dic.keys() or pairs[1] not in self.dic.keys():
+                res.append(-1)
+            elif pairs[0] == pairs[1]:
+                res.append(1)
+            else:
+                flag = 0
+                for p in self.dic[pairs[0]]:
+                    if p[0] == pairs[1]:
+                        flag = 1
+                        res.append(p[1])
+                        break
+                if flag == 0:
+                    res.append(-1)
+        return res
+                
+        
+        
+    def dfs(self, root, child, distance):
+        for grandchild in self.graph[child]:
+            if grandchild[0] not in self.visited:
+                self.visited.append(grandchild[0])
+                self.dic[root].append([grandchild[0], grandchild[1]*distance])
+                self.dfs(root, grandchild[0], grandchild[1]*distance)
