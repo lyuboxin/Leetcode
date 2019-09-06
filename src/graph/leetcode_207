@@ -1,0 +1,36 @@
+class Solution(object):
+    def canFinish(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        self.visited = collections.defaultdict()
+        self.recStack = collections.defaultdict()
+        self.node = collections.defaultdict(list)
+        self.prerequisites = prerequisites
+        for i in range(len(prerequisites)):
+            for k in range(len(prerequisites[i])):
+                self.recStack[prerequisites[i][k]] = 0
+                self.visited[prerequisites[i][k]] = 0
+            self.node[prerequisites[i][0]].append(i)
+        for j in self.node.keys():
+            if self.visited[j] == 0:
+                if self.dfs(self.node[j], j) == True:
+                    return False
+        return True
+            
+                
+    def dfs(self, array, n):
+        self.visited[n] = 1
+        self.recStack[n] = 1
+        for index in array:
+            for neighbor in self.prerequisites[index]:
+                if neighbor != n:
+                    if self.visited[neighbor] == 0:
+                        if neighbor in self.node and self.dfs(self.node[neighbor], neighbor) == True:
+                            return True
+                    elif self.recStack[neighbor] == 1:
+                        return True
+        self.recStack[n] = 0
+        return False
