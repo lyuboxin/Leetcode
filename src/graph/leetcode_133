@@ -1,0 +1,32 @@
+"""
+# Definition for a Node.
+class Node(object):
+    def __init__(self, val, neighbors):
+        self.val = val
+        self.neighbors = neighbors
+"""
+class Solution(object):
+    def cloneGraph(self, node):
+        """
+        :type node: Node
+        :rtype: Node
+        """
+        self.visited = {}
+        root = Node(node.val, [])
+        self.visited[root.val] = root
+        for neighbor in node.neighbors:
+            if neighbor.val in self.visited:
+                root.neighbors.append(self.visited[neighbor.val])
+            else:
+                self.dfs(root, neighbor)
+        return root
+    
+    def dfs(self, parent, child):
+        copy_neighbor = Node(child.val, [])
+        self.visited[copy_neighbor.val] = copy_neighbor
+        for neighbor in child.neighbors:
+            if neighbor.val not in self.visited:
+                self.dfs(copy_neighbor, neighbor)
+            else:
+                copy_neighbor.neighbors.append(self.visited[neighbor.val])
+        parent.neighbors.append(copy_neighbor)
