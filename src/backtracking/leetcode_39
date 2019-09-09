@@ -1,0 +1,20 @@
+class Solution(object):
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        #dfs
+        res = []
+        candidates = sorted(candidates)
+        self.dfs(candidates, target, 0, [], res)
+        return res
+        
+    def dfs(self, array, target, index, path, res):
+        if target == 0:
+            res.append(path)
+        else:
+            for i in range(index, len(array)):
+                if target - array[i] >= 0:
+                    self.dfs(array, target-array[i], i, path+[array[i]], res)
