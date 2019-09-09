@@ -1,0 +1,19 @@
+class Solution(object):
+    def combine(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        res = []
+        array = [i for i in range(1, n+1)]
+        self.dfs(array, k, 0, [], res)
+        return res
+        
+        
+    def dfs(self, array, k, i, path, res):
+        if k == 0:
+            res.append(path[:])
+        else:
+            for j in range(i, len(array)):
+                self.dfs(array, k-1, j+1, path+[array[j]], res)
