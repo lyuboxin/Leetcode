@@ -1,0 +1,23 @@
+class Solution(object):
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        self.ans = []
+        self.chosen = []
+        self.backtracking(nums)
+        return self.ans
+        
+    def backtracking(self, nums):
+        if nums == []:
+            self.ans.append(self.chosen[:])
+
+
+        else:
+            pick = nums.pop()
+            self.chosen.append(pick)
+            self.backtracking(nums)
+            self.chosen.pop()
+            self.backtracking(nums)
+            nums.append(pick)
