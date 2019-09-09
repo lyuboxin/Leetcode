@@ -1,0 +1,42 @@
+class Solution(object):
+    def combinationSum3(self, k, n):
+        """
+        :type k: int
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        #backtracking
+#         array = [i for i in range(1,10)]
+#         self.chosen = []
+#         self.res = []
+#         self.backtracking(array, k, n)
+#         return self.res
+    
+#     def backtracking(self, array, k, n):
+#         if array == []:
+#             if len(self.chosen) == k and sum(self.chosen) == n:
+#                 self.res.append(self.chosen[:])
+#         else:
+#             pick = array.pop()
+#             self.chosen.append(pick)
+#             self.backtracking(array, k, n)
+#             self.chosen.pop()
+#             self.backtracking(array, k, n)
+#             array.append(pick)
+            
+            
+        #dfs
+        array = [i for i in range(1,10)]
+        res = []
+        self.k = k
+        self.n =n
+        self.dfs(array, 0, [], res)
+        return res
+    
+    def dfs(self, array, index, path, res):
+        if len(path) == self.k and sum(path) == self.n:
+            res.append(path)
+        else:
+            for i in range(index, len(array)):
+                self.dfs(array, i+1, path+[array[i]], res)
+        
