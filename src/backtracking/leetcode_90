@@ -1,0 +1,24 @@
+class Solution(object):
+    def subsetsWithDup(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        self.res = []
+        self.chosen = []
+        nums = sorted(nums)
+        print nums
+        self.backtracking(nums)
+        return self.res
+    
+    def backtracking(self, nums):
+        if nums == []:
+            if self.chosen not in self.res:
+                self.res.append(self.chosen[:])
+        else:
+            pick = nums.pop()
+            self.chosen.append(pick)
+            self.backtracking(nums)
+            self.chosen.pop()
+            self.backtracking(nums)
+            nums.append(pick)
