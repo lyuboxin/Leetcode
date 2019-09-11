@@ -1,0 +1,28 @@
+class Solution(object):
+    def nextPermutation(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: None Do not return anything, modify nums in-place instead.
+        """
+        flag = -1
+        for i in range(len(nums)-1, 0, -1):
+            if nums[i] <= nums[i-1]:
+                continue
+            else:
+                flag = i - 1
+                break
+        if flag == -1:
+            nums.sort()
+        else:
+            for i in range(flag+1, len(nums)):
+                for j in range(i+1, len(nums)):
+                    if nums[i] > nums[j]:
+                        a = nums[i]
+                        nums[i] = nums[j]
+                        nums[j] = a
+            for i in range(flag+1, len(nums)):
+                if nums[flag] < nums[i]:
+                    a = nums[flag]
+                    nums[flag] = nums[i]
+                    nums[i] = a
+                    break
