@@ -1,0 +1,36 @@
+class Solution(object):
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        self.dic = collections.defaultdict(list)
+        self.dic[1] = []
+        self.digits = digits
+        alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        if digits == "":
+            return []
+        index = 0
+        for i in range(2, 10):
+            if i == 7:
+                self.dic[str(i)] = alph[index: index+4]
+                index = index +4
+            else:
+                self.dic[str(i)] = alph[index: index+3]
+                index = index + 3
+        self.dic["9"].append('z')
+        res = []
+        self.length = len(digits)
+        string = []
+        for st in digits:
+            string.append(st)
+        self.dfs(string, 0, "", res)
+        return res
+        
+    def dfs(self, string, index, path, res):
+        if len(path) == self.length:
+            res.append(path)
+        else:
+            for i in range(index, len(string)):
+                for a in self.dic[string[i]]:
+                    self.dfs(string, i+1, path+a, res)
