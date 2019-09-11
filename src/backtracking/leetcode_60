@@ -1,0 +1,23 @@
+class Solution(object):
+    def getPermutation(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: str
+        """
+        count = 0
+        string = ""
+        array = [i for i in range(1, n+1)]
+        length = len(array)
+        for i in range(n):
+            for j in array:
+                tmp = 1
+                for m in range(1, length-i):
+                    tmp = tmp*m
+                count = count + tmp
+                if count >= k:
+                    string = string + str(j)
+                    count = count - tmp
+                    array.remove(j)
+                    break
+        return string
