@@ -1,0 +1,22 @@
+class Solution(object):
+    def permuteUnique(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        res = []
+        self.length = len(nums)
+        self.dfs(nums, [], res)
+        return res
+    
+    def dfs(self, nums, path, res):
+        if len(path) == self.length:
+            if path not in res:
+                res.append(path)
+        else:
+            if len(path) < self.length:
+                for j in nums:
+                    array = nums[:]
+                    array.remove(j)
+                    self.dfs(array, path+[j], res)
+                    
