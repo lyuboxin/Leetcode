@@ -1,0 +1,19 @@
+class Solution(object):
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        res = []
+        self.length = len(nums)
+        self.dfs(nums, [], res)
+        return res
+    
+    def dfs(self, nums, path, res):
+        if len(path) == self.length:
+            res.append(path)
+        else:
+            if len(path) < self.length:
+                for j in nums:
+                    if j not in path:
+                        self.dfs(nums, path+[j], res)
