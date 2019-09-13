@@ -1,0 +1,44 @@
+class Solution(object):
+    def coinChange(self, coins, amount):
+        """
+        :type coins: List[int]
+        :type amount: int
+        :rtype: int
+        """
+        Max = [float('inf')]
+        table = [0] + Max * amount
+        for i in range(1, len(table)):
+            result = float('inf')
+            for coin in coins:
+                if i - coin >= 0:
+                    result = min(result, 1 + table[i-coin])
+            if result != float('inf'):
+                table[i] = result
+            else:
+                table[i] = float('inf')
+        return table[-1] if table[-1]!= float('inf') else -1
+    
+#         self.coins = coins
+#         dp = [0] * (amount+1)
+#         self.dfs(amount, dp)
+#         return dp[-1]
+        
+        
+#     def dfs(self, amount, dp):
+#         if amount == 0:
+#             return 0
+#         if dp[amount] == -1:
+#             return float('inf')
+#         if dp[amount] != 0:
+#             return dp[amount]
+#         else:
+#             result = float('inf')
+#             for coin in self.coins:
+#                 if amount -coin >= 0:
+#                     result = min(result, 1 + self.dfs(amount-coin, dp))
+#             if result != float('inf'):
+#                 dp[amount] = result
+#             else:
+#                 dp[amount] = -1
+#             return resultclass Solution(object):
+
